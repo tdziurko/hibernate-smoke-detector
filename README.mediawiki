@@ -1,0 +1,27 @@
+= What is it ? =
+
+This page describes usage of Hibernate Smoke Detector, a simple parser that counts queries executed in each second and generates a report showing places where might be some problems, eg. n+1 problem or non optimal number of counts on page testing visibility of many elements. Parser can be also useed for JPA queries.
+
+= Hibernate Smoke Detector =
+
+* Author: Tomasz Dziurko
+* Source code: TO DO
+
+== Download ==
+
+Clone this repository and run
+
+ mvn install
+
+== Usage ==
+
+This is a command line tool that will print report output to the console.
+
+The simplest usage is
+
+ java -jar hibernate-smoke-detector.jar PATH_TO_FILE_CONTAINING_ONLY_SQL_LOGS
+
+=== Additional notes ===
+
+* Provided file with logs should contain only hqls/sqls, otwherwise parser might not work as expected.
+* Only commands that are executed more than one time in a each second are listed in the report.
