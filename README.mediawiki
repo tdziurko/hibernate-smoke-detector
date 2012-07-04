@@ -5,7 +5,7 @@ This page describes usage of Hibernate Smoke Detector, a simple parser that coun
 = Hibernate Smoke Detector =
 
 * Author: Tomasz Dziurko
-* Source code: TO DO
+* Source code: https://github.com/tdziurko/hibernate-smoke-detector/
 
 == Download ==
 
@@ -19,7 +19,7 @@ This is a command line tool that will print report output to the console.
 
 The simplest usage is
 
- java -jar hibernate-smoke-detector.jar PATH_TO_FILE_CONTAINING_ONLY_SQL_LOGS
+ java -jar hibernate-smoke-detector-1.0-jar-with-dependencies.jar PATH_TO_FILE_CONTAINING_ONLY_SQL_LOGS
 
 === Additional notes ===
 
