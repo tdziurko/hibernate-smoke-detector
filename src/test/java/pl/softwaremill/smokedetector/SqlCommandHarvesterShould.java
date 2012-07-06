@@ -19,23 +19,24 @@ public class SqlCommandHarvesterShould {
     }
 
     @Test
-    public void setSqlDateProperly() {
+    public void setSqlExecutionTimeProperly() {
 
         // when
-        harvester.processCommandFragment("2012-06-22 15:53:45,215 DEBUG [org.hibernate.SQL] (http-127.0.0.1-8280-6) ", true);
+        harvester.processCommandFragment("15:53:45,215 DEBUG [org.hibernate.SQL]", true);
 
         // then
-        Date date = harvester.getCurrentCommand().getExecutionTime();
-        DateTime jodaDate = new DateTime(2012, 06, 22, 15, 53, 45, 0);
+        DateTime date = new DateTime(harvester.getCurrentCommand().getExecutionTime());
 
-        assertThat(date).isEqualTo(jodaDate.toDate());
+        DateTime expectedTime = new DateTime(new Date().getTime()).withTime(15, 53, 45, 0);
+
+        assertThat(date.getMillisOfDay()).isEqualTo(expectedTime.getMillisOfDay());
     }
 
     @Test
     public void appendToCurrentCommand() {
 
         // given
-        harvester.processCommandFragment("2012-06-22 15:53:45,215 DEBUG [org.hibernate.SQL] (http-127.0.0.1-8280-6) ", true);
+        harvester.processCommandFragment("15:53:45,215 DEBUG [org.hibernate.SQL]", true);
 
         // when
         String commandFragment = "fragment";
@@ -50,10 +51,10 @@ public class SqlCommandHarvesterShould {
     public void appendToNewCommand() {
 
         // given
-        harvester.processCommandFragment("2012-06-22 15:53:45,215 DEBUG [org.hibernate.SQL] (http-127.0.0.1-8280-6) ", true);
+        harvester.processCommandFragment("15:53:45,215 DEBUG [org.hibernate.SQL]", true);
 
         // when
-        String commandFragment = "2012-07-26 00:01:02,215 DEBUG [org.hibernate.SQL] (http-127.0.0.1-8280-6)";
+        String commandFragment = "00:01:02,215 DEBUG [org.hibernate.SQL]";
         harvester.processCommandFragment(commandFragment, true);
 
         // then
@@ -65,7 +66,7 @@ public class SqlCommandHarvesterShould {
     public void createSqlCommandWithNewLines() {
 
         // when
-        harvester.processCommandFragment("2012-06-22 15:53:45,215 DEBUG [org.hibernate.SQL] (http-127.0.0.1-8280-6) ", true);
+        harvester.processCommandFragment("15:53:45,215 DEBUG [org.hibernate.SQL]", true);
         harvester.processCommandFragment("select *", false);
         harvester.processCommandFragment("from table", false);
         harvester.processCommandFragment("where id = ?", false);
@@ -80,10 +81,10 @@ public class SqlCommandHarvesterShould {
     public void countSameCommandExecutedInTheSameSecondAsOne() {
 
         // when
-        harvester.processCommandFragment("2012-06-22 15:53:45,215 DEBUG [org.hibernate.SQL] (http-127.0.0.1-8280-6) ", true);
+        harvester.processCommandFragment("15:53:45,215 DEBUG [org.hibernate.SQL]", true);
         harvester.processCommandFragment("select *", false);
         harvester.processCommandFragment("from table", false);
-        harvester.processCommandFragment("2012-06-22 15:53:45,987 DEBUG [org.hibernate.SQL] (http-127.0.0.1-8280-6) ", true);
+        harvester.processCommandFragment("15:53:45,987 DEBUG [org.hibernate.SQL]", true);
         harvester.processCommandFragment("select *", false);
         harvester.processCommandFragment("from table", false);
 
@@ -97,10 +98,10 @@ public class SqlCommandHarvesterShould {
     public void countDifferentCommandsExecutedInTheSameSecondSeparately() {
 
         // when
-        harvester.processCommandFragment("2012-06-22 15:53:45,215 DEBUG [org.hibernate.SQL] (http-127.0.0.1-8280-6) ", true);
+        harvester.processCommandFragment("15:53:45,215 DEBUG [org.hibernate.SQL]", true);
         harvester.processCommandFragment("select *", false);
         harvester.processCommandFragment("from table", false);
-        harvester.processCommandFragment("2012-06-22 15:53:45,987 DEBUG [org.hibernate.SQL] (http-127.0.0.1-8280-6) ", true);
+        harvester.processCommandFragment("15:53:45,987 DEBUG [org.hibernate.SQL]", true);
         harvester.processCommandFragment("select *", false);
         harvester.processCommandFragment("from table2", false);
 

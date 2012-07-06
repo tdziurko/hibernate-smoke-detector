@@ -9,8 +9,8 @@ import java.util.Date;
 
 public class SingleLogLineAnalyser {
 
-    public static int DATE_TIME_STRING_LENGTH = 20;
-    private static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static int DATE_TIME_STRING_LENGTH = 12;
+    public static SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 
     // 2012-06-22 15:53:45,215
     public static boolean isItStartOfNewCommand(String line) {

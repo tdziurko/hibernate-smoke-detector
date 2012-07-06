@@ -16,7 +16,8 @@ public class SqlCommandHarvester {
             flushLastCommand();
             currentCommand = new SqlCommand();
             currentCommand.setExecutionTime(SingleLogLineAnalyser.extractDateFromFirstSqlLine(fragment));
-            int lastCharToIgnoreAsNotSqlCommand = fragment.indexOf(")");
+
+            int lastCharToIgnoreAsNotSqlCommand = fragment.indexOf("]");
 
             String cleanFragment = StringUtils.substring(fragment, lastCharToIgnoreAsNotSqlCommand + 1);
             if(cleanFragment.trim().isEmpty() == false) {

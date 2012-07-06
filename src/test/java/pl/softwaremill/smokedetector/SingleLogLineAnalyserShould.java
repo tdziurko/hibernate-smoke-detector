@@ -10,7 +10,7 @@ public class SingleLogLineAnalyserShould {
     public void noticeNewCommandStart() {
 
         // given
-        String line = "2012-06-22 15:53:45,215 DEBUG [org.hibernate.SQL] (http-127.0.0.1-8280-6)";
+        String line = "14:10:44,714 DEBUG [org.hibernate.SQL]";
 
         // when
         boolean result = SingleLogLineAnalyser.isItStartOfNewCommand(line);
@@ -23,7 +23,7 @@ public class SingleLogLineAnalyserShould {
     public void notNoticeNewCommandStartForPartialDate() {
 
         // given
-        String line = "2012-06-22 DEBUG [org.hibernate.SQL] (http-127.0.0.1-8280-6)";
+        String line = "14:10 DEBUG [org.hibernate.SQL]";
 
         // when
         boolean result = SingleLogLineAnalyser.isItStartOfNewCommand(line);

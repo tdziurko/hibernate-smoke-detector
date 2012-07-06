@@ -14,9 +14,7 @@ public class ReportPrinter {
 
         for (SqlCommand sqlCommand : commandsInTime.elementSet()) {
             int count = commandsInTime.count(sqlCommand);
-            if(count > 1) {
-                sortedCommands.add(new SqlCommandWithCount(sqlCommand, count));
-            }
+            sortedCommands.add(new SqlCommandWithCount(sqlCommand, count));
         }
 
         Collections.sort(sortedCommands);
@@ -30,7 +28,7 @@ public class ReportPrinter {
             System.out.println("Number of executions: " + command.getCount());
             System.out.println("Command:");
             System.out.println(command.getCommand().getCommandString());
-            System.out.println("Time: " + command.getCommand().getExecutionTime());
+            System.out.println("Time: " + SingleLogLineAnalyser.formatter.format(command.getCommand().getExecutionTime()));
             System.out.println("------------------------------------------------");
         }
     }
