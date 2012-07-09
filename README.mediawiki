@@ -4,7 +4,7 @@ This page describes usage of Hibernate Smoke Detector, a simple parser that coun
 and generates a report showing places where might be some problems, eg. n+1 problem or non optimal number of counts
 on page testing visibility of many elements. Parser can be also useed for JPA queries.
 
-More details: http://tomaszdziurko.pl/2012/07/hibernate-smoke-detector/
+'''More details:''' http://tomaszdziurko.pl/2012/07/hibernate-smoke-detector/
 
 = Hibernate Smoke Detector =
 
@@ -32,7 +32,4 @@ This part of log is indispensable so parser could put each query to the proper "
 
 * Author: Tomasz Dziurko
 * Source code: https://github.com/tdziurko/hibernate-smoke-detector/
-
-== Download ==
-
-Clone this repository and run
+* Blog post describing this mini-project in more detail: http://tomaszdziurko.pl/2012/07/hibernate-smoke-detector/
