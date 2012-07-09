@@ -15,7 +15,7 @@ It generates a report showing which queries are executed most times and when so 
 Using this mini-application should help you to avoid some problems with your queries that often go to the production
 unnoticed: N+1 problems and duplicated queries checking condition on the same page/view.
 
-=== How it works ===
+== How it works ==
 
 * Set up logger in your application to write all hql queries to a separate file
 * Run your end-to-end tests (in our case Selenium tests) or just let testers do some clicking through your application
