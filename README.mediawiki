@@ -1,8 +1,33 @@
 = What is it ? =
 
-This page describes usage of Hibernate Smoke Detector, a simple parser that counts queries executed in each second and generates a report showing places where might be some problems, eg. n+1 problem or non optimal number of counts on page testing visibility of many elements. Parser can be also useed for JPA queries.
+This page describes usage of Hibernate Smoke Detector, a simple parser that counts queries executed in each second
+and generates a report showing places where might be some problems, eg. n+1 problem or non optimal number of counts
+on page testing visibility of many elements. Parser can be also useed for JPA queries.
+
+More details: http://tomaszdziurko.pl/2012/07/hibernate-smoke-detector/
 
 = Hibernate Smoke Detector =
+
+Hibernate Smoke Detector is simple but quite useful parser that checks your application and helps to eliminate identical
+queries fired many times in a very short period of time.
+
+It generates a report showing which queries are executed most times and when so developer could find them in his code easily.
+Using this mini-application should help you to avoid some problems with your queries that often go to the production
+unnoticed: N+1 problems and duplicated queries checking condition on the same page/view.
+
+=== How it works ===
+
+* Set up logger in your application to write all hql queries to a separate file
+* Run your end-to-end tests (in our case Selenium tests) or just let testers do some clicking through your application
+* Get sources from https://github.com/tdziurko/hibernate-smoke-detector
+* mvn clean install
+* Run Hibernate Smoke Detector with your log file: java -jar hibernate-smoke-detector/target/hibernate-smoke-detector-1.0-jar-with-dependencies.jar [your_log_file] >  [your_report_file]
+* Analyze the report and fix problems.
+
+Hibernate Smoke Detector counts how many each query was executed in each second, then compiles report starting from queries that have the highest counter. Currently the only drawback is that parser works only with specific date time format in the logs:
+
+pattern="%d{HH:mm:ss,SSS} %-5p [%c] %s%E%n"
+This part of log is indispensable so parser could put each query to the proper "date-time basket", so if you want to use if out of the box, you should setup your logger accordingly. If you can not change date format in hql log file, you have to fork the project and modify source code a little bit.
 
 * Author: Tomasz Dziurko
 * Source code: https://github.com/tdziurko/hibernate-smoke-detector/
@@ -10,18 +35,3 @@ This page describes usage of Hibernate Smoke Detector, a simple parser that coun
 == Download ==
 
 Clone this repository and run
-
- mvn install
-
-== Usage ==
-
-This is a command line tool that will print report output to the console.
-
-The simplest usage is
-
- java -jar hibernate-smoke-detector-1.0-jar-with-dependencies.jar PATH_TO_FILE_CONTAINING_ONLY_SQL_LOGS
-
-=== Additional notes ===
-
-* Provided file with logs should contain only hqls/sqls, otwherwise parser might not work as expected.
-* Only commands that are executed more than one time in a each second are listed in the report.
