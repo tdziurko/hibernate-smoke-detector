@@ -27,6 +27,7 @@ unnoticed: N+1 problems and duplicated queries checking condition on the same pa
 Hibernate Smoke Detector counts how many each query was executed in each second, then compiles report starting from queries that have the highest counter. Currently the only drawback is that parser works only with specific date time format in the logs:
 
 pattern="%d{HH:mm:ss,SSS} %-5p [%c] %s%E%n"
+
 This part of log is indispensable so parser could put each query to the proper "date-time basket", so if you want to use if out of the box, you should setup your logger accordingly. If you can not change date format in hql log file, you have to fork the project and modify source code a little bit.
 
 * Author: Tomasz Dziurko
