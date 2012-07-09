@@ -22,13 +22,13 @@ public class ReportPrinter {
     }
 
     public void print() {
-        System.out.println("Report contains all sql commands that were executed more than one time in the same second\n");
+        System.out.println("Report contains all sql commands with the number of executions in each second.\n");
 
         for (SqlCommandWithCount command : sortedCommands) {
             System.out.println("Number of executions: " + command.getCount());
+            System.out.println("Time: " + SingleLogLineAnalyser.formatter.format(command.getCommand().getExecutionTime()));
             System.out.println("Command:");
             System.out.println(command.getCommand().getCommandString());
-            System.out.println("Time: " + SingleLogLineAnalyser.formatter.format(command.getCommand().getExecutionTime()));
             System.out.println("------------------------------------------------");
         }
     }
