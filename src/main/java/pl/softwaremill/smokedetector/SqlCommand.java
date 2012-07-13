@@ -1,11 +1,15 @@
 package pl.softwaremill.smokedetector;
 
+import com.google.common.collect.Lists;
+
 import java.util.Date;
+import java.util.List;
 
 public class SqlCommand {
 
     private Date executionTime;
     private String command;
+    private List<String> redundantTables = Lists.newArrayList();
 
     public SqlCommand() {
         command = "";
@@ -25,6 +29,10 @@ public class SqlCommand {
 
     public void appendFragment(String fragment) {
         this.command = command + fragment;
+    }
+
+    public List<String> getRedundantTables() {
+        return redundantTables;
     }
 
     @Override
