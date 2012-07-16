@@ -22,8 +22,6 @@ public class ReportPrinter {
     }
 
     public void print() {
-        System.out.println("Report contains all sql commands with the number of executions in each second.\n");
-
         for (SqlCommandWithCount command : sortedCommands) {
             System.out.println("Number of executions: " + command.getCount());
             System.out.println("Time: " + SingleLogLineAnalyser.formatter.format(command.getCommand().getExecutionTime()));

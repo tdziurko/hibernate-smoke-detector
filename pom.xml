@@ -61,6 +61,17 @@
             <version>1.4</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>pl.softwaremill.common</groupId>
+            <artifactId>softwaremill-test-util</artifactId>
+            <version>66-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>dumbster</groupId>
+                    <artifactId>dumbster</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
     </dependencies>
 
@@ -116,6 +127,12 @@
             <id>jboss-public-repository-group</id>
             <name>jboss-public-repository-group</name>
             <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+        </repository>
+
+        <repository>
+            <id>smlcommon-repos</id>
+            <name>SML Common Repos</name>
+            <url>http://tools.softwaremill.pl/nexus/content/groups/smlcommon-repos</url>
         </repository>
     </repositories>
 

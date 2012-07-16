@@ -37,21 +37,11 @@ public class SqlCommand {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof SqlCommand)) return false;
-
-        SqlCommand that = (SqlCommand) o;
-
-        if (command != null ? !command.equals(that.command) : that.command != null) return false;
-        if (executionTime != null ? !executionTime.equals(that.executionTime) : that.executionTime != null) return false;
-
-        return true;
+        return SqlCommandComparator.equals(this, o);
     }
 
     @Override
     public int hashCode() {
-        int result = executionTime != null ? executionTime.hashCode() : 0;
-        result = 31 * result + (command != null ? command.hashCode() : 0);
-        return result;
+        return SqlCommandComparator.hashCode(this);
     }
 }

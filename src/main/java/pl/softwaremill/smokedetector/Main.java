@@ -12,9 +12,15 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Preconditions.checkArgument(args.length == 1, "Please provide only one parameter: path to file with Hibernate log");
+        Preconditions.checkArgument(args.length >= 1 || args.length <= 2, "Please provide one or two parameters.\n" +
+                " - 1st parameter: path to file with Hibernate log (required)\n" +
+                " - 2nd parameter: \"unique\" (optional) if you want to each command appear in the report only once");
 
         String filePath = args[0];
+        if(args.length == 2 && args[1].equals("unique")) {
+            boolean useExecutionTimeInComparison = false;
+            SqlCommandComparator.setUseExecutionTimeInComparison(useExecutionTimeInComparison);
+        }
         File file = new File(filePath);
         BufferedReader reader = Files.newReader(file, Charset.defaultCharset());
 
