@@ -6,10 +6,10 @@ import com.google.common.collect.Multiset;
 import java.util.Collections;
 import java.util.List;
 
-public class ReportPrinter {
+public class NumberOfExecutionsReportPrinter {
     private List<SqlCommandWithCount> sortedCommands;
 
-    public ReportPrinter(Multiset<SqlCommand> commandsInTime) {
+    public NumberOfExecutionsReportPrinter(Multiset<SqlCommand> commandsInTime) {
         sortedCommands = Lists.newArrayList();
 
         for (SqlCommand sqlCommand : commandsInTime.elementSet()) {

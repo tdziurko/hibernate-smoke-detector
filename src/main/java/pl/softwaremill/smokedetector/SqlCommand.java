@@ -23,12 +23,20 @@ public class SqlCommand {
         this.executionTime = executionTime;
     }
 
+    public void setCommand(String command) {
+        this.command = command;
+    }
+
     public String getCommandString() {
         return command;
     }
 
     public void appendFragment(String fragment) {
         this.command = command + fragment;
+    }
+
+    public void setRedundantTables(List<String> redundantTables) {
+        this.redundantTables = redundantTables;
     }
 
     public List<String> getRedundantTables() {
